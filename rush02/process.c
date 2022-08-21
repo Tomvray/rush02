@@ -1,9 +1,7 @@
-
-
-char ***dict_gen(char *dico_name);
-int	size_int(char	*str);
-void    ft_putstr(char *str);
-void	ft_putchar(char);
+char	***dict_gen(char *dico_name);
+int	size_int(char *str);
+void	ft_putstr(char *str);
+void	ft_putchar(char c);
 void	ft_free(char ***dict);
 
 int	ft_strncmp(char *s1, char *s2, unsigned int n)
@@ -34,7 +32,6 @@ void	ft_put_digit(char *nbr, int size, char ***dict)
 
 	k = 0;
 	res = 1;
-
 	while (k < 41)
 	{
 		if (res && size_int(dict[k][0]) == size)
@@ -71,13 +68,13 @@ void	ft_print_hundred(char *nbr, int size, char ***dict)
 	{
 		if (nbr[i] != '0')
 		{
-		ft_put_digit(nbr + i, 1, dict);
-		ft_put_digit("100", 3, dict);
+			ft_put_digit(nbr + i, 1, dict);
+			ft_put_digit("100", 3, dict);
 		}
 		i++;
 		size--;
 	}
-	if (size == 2 && nbr[i])
+	if (size == 2)
 	{
 		if (nbr [i] != '0')
 		{
@@ -98,33 +95,93 @@ void	ft_print_hundred(char *nbr, int size, char ***dict)
 		ft_put_digit(nbr + i, 1, dict);
 }
 
-int process(char *nbr, char ***dict)
+void	ft_put_thousand(int size, char ***dict)
 {
-    int i;
-    int size;
+	int	k;
+	int	res;
+	int	i;
 
-    size = size_int(nbr);
-	
-    ft_print_hundred(nbr, 3, dict);
+	i = 1;
+	k = 0;
+	res = 1;
+	while (k < 41)
+	{
+		if (res && size_int(dict[k][0]) == size)
+		{
+			if (dict[k][0][0] == '1')
+			{
+				while (dict[k][0][i] == '0')
+					i++;
+			}
+			if (i == size)
+			{
+				ft_putstr(dict[k][1]);
+				res = 0;
+			}
+		}
+		k++;
+	}
+	ft_putchar(' ');
+}
+
+int	ft_print_number(char *nbr, int size, char ***dict)
+{
+	int	size_to_print;
+
+	if (size > 3)
+	{
+		size_to_print = size % 3;
+		if (size_to_print == 0)
+			size_to_print = 3;
+		ft_print_hundred(nbr, size_to_print, dict);
+		ft_put_thousand(size - size_to_print + 1, dict);
+		ft_print_number(nbr + size_to_print, size - size_to_print, dict);
+	}
+	else if (size == 1 && nbr[0] == '0')
+		ft_put_digit("0", 1, dict);
+	else
+		ft_print_hundred(nbr, size, dict);
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	process(char *nbr, char ***dict)
 {
-    char ***dict;
-    char *number;
+	int	size;
 
-    if (argc > 3 || argc == 1)
-    {
-        ft_putstr("Error\n");
-        return (0);
-    }
-    if (argc == 3)
-        dict = dict_gen(argv[1]);
-    else
-        dict = dict_gen("numbers.dict");
-    number = argv[argc - 1];
+	if (nbr[0] == '+')
+		nbr = nbr + 1;
+	else if (nbr[0] == '-')
+	{
+		nbr = nbr + 1;
+		ft_putstr("minus ");
+	}
+	size = size_int(nbr);
+	while (size > 1 && nbr[0] == '0')
+	{
+		size --;
+		nbr = nbr + 1;
+	}
+	ft_print_number(nbr, size, dict);
+	ft_putchar(10);
+	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	char	***dict;
+	char	*number;
+
+	if (argc > 3 || argc == 1)
+	{
+		ft_putstr("Error\n");
+		return (0);
+	}
+	if (argc == 3)
+		dict = dict_gen(argv[1]);
+	else
+		dict = dict_gen("numbers.dict");
+	number = argv[argc - 1];
 	process(number, dict);
 	ft_free(dict);
-    return (0);
+	return (0);
 }
