@@ -83,7 +83,7 @@ int	ft_size_file(char *file_name)
 	return (file_size);
 }
 
-char	***dict_gen(char *dico_name)
+char	***dict_gen(char *dict_name)
 {
 	int		fd;
 	int		file_size;
@@ -91,8 +91,8 @@ char	***dict_gen(char *dico_name)
 	char	*str;
 	char	***dict;
 
-	file_size = ft_size_file(dico_name);
-	fd = open(dico_name, O_RDONLY);
+	file_size = ft_size_file(dict_name);
+	fd = open(dict_name, O_RDONLY);
 	if (fd == -1)
 		return (ft_openfailed());
 	str = malloc(sizeof(char) * (file_size + 1));

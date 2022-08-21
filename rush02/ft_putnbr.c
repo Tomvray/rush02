@@ -10,31 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_str.h"
+
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-int		ft_strlen(char	*str);
-int		size_int(char	*str);
-
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (n > 0)
-	{
-		while (i < n - 1 && s1[i] != 0 && s2[i] != 0)
-		{
-			if (s1[i] != s2[i])
-			{
-				return (s1[i] - s2[i]);
-			}
-			i++;
-		}
-		return (s1[i] - s2[i]);
-	}
-	else
-		return (0);
-}
 
 void	ft_put_digit(char *nbr, int size, char ***dict)
 {
