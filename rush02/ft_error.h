@@ -59,4 +59,3 @@ int	ft_ctrldict_error(char *str, int i)
 	return (1);
 }
 #endif
-#endif
