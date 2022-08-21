@@ -1,3 +1,6 @@
+54   :     ICI
+1000: thousand
+1000000000000: trillion
 0: zero
 1: one
 2: two
@@ -15,7 +18,6 @@
 14: fourteen
 15: fifteen
 16: sixteen
-17: seventeen
 18: eighteen
 19: nineteen
 20: twenty
@@ -27,10 +29,8 @@
 80: eighty
 90: ninety
 100: hundred
-1000: thousand
 1000000: million
 1000000000: billion
-1000000000000: trillion
 1000000000000000: quadrillion
 1000000000000000000: quintillion
 1000000000000000000000: sextillion
@@ -39,3 +39,4 @@
 1000000000000000000000000000000: nonillion
 1000000000000000000000000000000000: decillion
 1000000000000000000000000000000000000: undecillion
+17: seventeen

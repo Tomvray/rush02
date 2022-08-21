@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions_print.c                                  :+:      :+:    :+:   */
+/*   ft_putnbr.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hucorrei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/21 15:09:30 by hucorrei          #+#    #+#             */
-/*   Updated: 2022/08/21 15:09:34 by hucorrei         ###   ########.fr       */
+/*   Created: 2022/08/21 16:16:03 by hucorrei          #+#    #+#             */
+/*   Updated: 2022/08/21 16:26:25 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_PUTNBR_H
+# define FT_PUTNBR_H
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (*(str + i) != 0)
-	{
-		write(1, str + i, 1);
-		i++;
-	}
-}
+int		ft_strncmp(char *s1, char *s2, unsigned int n);
+void	ft_put_thousand(int size, char ***dict);
+void	ft_print_hundred(char *nbr, int size, char ***dict);
+void	ft_print_ten(char *nbr, int size, char ***dict);
+void	ft_put_digit(char *nbr, int size, char ***dict);
+#endif

@@ -6,7 +6,7 @@
 /*   By: hucorrei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:28:58 by hucorrei          #+#    #+#             */
-/*   Updated: 2022/08/21 14:44:39 by hucorrei         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:48:26 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,92 +15,8 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-char	***ft_openfailed(void)
-{
-	write (1, "OPEN() Failed\n", 14);
-	return (NULL);
-}
-
-int	ft_printerror(void)
-{
-	write (1, "Dict Error\n", 11);
-	return (0);
-}
-
-char	***ft_error(void)
-{
-	write (1, "ERROR\n", 6);
-	return (NULL);
-}
-
-char	*ft_strncpy(char *src, int size)
-{
-	int	i;
-	char			*dest;
-
-	i = 0;
-	dest = malloc((size + 1) * sizeof(char));
-	while (i < size && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (dest);
-}
-
-int	ft_ctrldict_error(char *str, int i)
-{
-	while (str[i])
-	{	
-		if (str[i] == '-' || str[i] == '+')
-			i++;
-		if (str[i] < 48 || str[i] > 57)
-			return (ft_printerror());
-		while (str[i] >= '0' && str[i] <= '9')
-			i++;
-		while (str[i] == ' ')
-			i++;
-		if (str[i] != ':')
-			return (ft_printerror());
-		i++;
-		while (str[i] == ' ')
-			i++;
-		while (str[i] != '\n')
-		{
-			if (str[i] < 32 || str[i] == 127)
-				return (ft_printerror());
-			i++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	size_int(char	*str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] <= '9' && str[i] >= '0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-int	ft_strlen(char	*str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != 10)
-	{
-		i++;
-	}
-	return (i);
-}
+#include "ft_error.h"
+#include "ft_str.h"
 
 void	ft_free(char ***dict)
 {
@@ -153,7 +69,7 @@ int	ft_size_file(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
-		write (1, "OPEN FAILED\n",12);
+		write (1, "OPEN FAILED\n", 12);
 		return (0);
 	}
 	file_size = 0;
