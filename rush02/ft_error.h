@@ -31,20 +31,19 @@ char	***ft_error(void)
 	write (1, "ERROR\n", 6);
 	return (NULL);
 }
-
 int	ft_ctrldict_error(char *str, int i)
 {
 	while (str[i])
 	{
 		if (str[i] == '-' || str[i] == '+')
 			i++;
-		if (str[i] < 48 || str[i] > 57)
+		if ((str[i] < 48 || str[i] > 57) && str[i] != 10)
 			return (ft_printerror());
 		while (str[i] >= '0' && str[i] <= '9')
 			i++;
 		while (str[i] == ' ')
 			i++;
-		if (str[i] != ':')
+		if (str[i] != ':' && str[i] != 10)
 			return (ft_printerror());
 		i++;
 		while (str[i] == ' ')
@@ -59,4 +58,5 @@ int	ft_ctrldict_error(char *str, int i)
 	}
 	return (1);
 }
+#endif
 #endif
