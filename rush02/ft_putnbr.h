@@ -13,7 +13,7 @@
 #ifndef FT_PUTNBR_H
 # define FT_PUTNBR_H
 
-void	ft_put_thousand(int size, char ***dict);
+void	ft_thousand(char *nbr, int size, char ***dict);
 void	ft_print_hundred(char *nbr, int size, char ***dict);
 void	ft_print_ten(char *nbr, int size, char ***dict);
 void	ft_put_digit(char *nbr, int size, char ***dict);

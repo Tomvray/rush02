@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= process.c dict.c functions_print.c ft_putnbr.c
+SRCS	= process.c dict.c functions_print.c ft_putnbr.c ft_str.c
 
 OBJS	= ${SRCS:.c=.o}
 

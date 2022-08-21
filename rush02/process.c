@@ -6,7 +6,7 @@
 /*   By: hucorrei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:12:07 by hucorrei          #+#    #+#             */
-/*   Updated: 2022/08/21 16:26:42 by hucorrei         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:44:56 by tvray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_clean_number(char	*nbr)
 		nbr = nbr + 1;
 	if (nbr[0] < '0' || nbr[0] > '9')
 	{
-		ft_putstr("ERROR\n")
+		ft_putstr("ERROR\n");
 		return (NULL);
 	}
 	size = size_int(nbr);
@@ -53,17 +53,17 @@ int	ft_print_number(char *nbr, int size, char ***dict)
 		if (size_to_print == 0)
 			size_to_print = 3;
 		i = 0;
-		while (nbr[i] == '0' && i < size_to_print)
+		while (nbr[i] == '0' && i < 3)
 			i++;
-		if (i != size_to_print)
-		{	
+		if (i == 3)
+			ft_print_number(nbr + size_to_print, size - size_to_print, dict);
+		else
+		{
 			ft_print_hundred(nbr, size_to_print, dict);
-			ft_put_thousand(size - size_to_print + 1, dict);
+			ft_thousand(nbr + size_to_print, size - size_to_print + 1, dict);
 			ft_print_number(nbr + size_to_print, size - size_to_print, dict);
 		}
 	}
-	else if (size == 1 && nbr[0] == '0')
-		ft_put_digit("0", 1, dict);
 	else
 		ft_print_hundred(nbr, size, dict);
 	return (1);
@@ -74,6 +74,11 @@ int	process(char *nbr, char ***dict)
 	int	size;
 
 	size = size_int(nbr);
+	if (size == 1 && nbr[0] == '0')
+	{
+		ft_put_digit("0", 1, dict);
+		return (1);
+	}
 	ft_print_number(nbr, size, dict);
 	ft_putchar(10);
 	return (1);

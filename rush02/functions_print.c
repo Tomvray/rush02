@@ -28,3 +28,19 @@ void	ft_putstr(char *str)
 		i++;
 	}
 }
+
+int	ft_put_space(char *nbr, int print)
+{
+	int	i;
+
+	i = 0;
+	while (nbr[i] && nbr[i] == '0')
+		i++;
+	if ((nbr[i] <= '9' && nbr[i] > '0'))
+	{
+		if (print)
+			ft_putchar(' ');
+		return (1);
+	}
+	return (0);
+}

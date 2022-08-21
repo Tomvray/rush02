@@ -34,7 +34,23 @@ void	ft_free(char ***dict)
 	free(dict);
 }
 
-char	***data_dict(char *str)
+int	ft_count_raws(char *str)
+{
+	int	nbr;
+	int	i;
+
+	i = 0;
+	nbr = 0;
+	while (str[i])
+	{
+		if (str[i] == 10)
+			nbr++;
+		i++;
+	}
+	return (nbr);
+}
+
+char	***data_dict(char *str, int n_raws)
 {
 	int		i;
 	int		k;
@@ -42,8 +58,8 @@ char	***data_dict(char *str)
 
 	i = 0;
 	k = 0;
-	res = malloc(sizeof(*res) * 42);
-	while (k < 41)
+	res = malloc(sizeof(*res) * (n_raws + 1));
+	while (k < n_raws)
 	{
 		res[k] = malloc(sizeof(**res) * 2);
 		res[k][0] = ft_strncpy(str + i, size_int(str + i));
@@ -103,6 +119,7 @@ char	***dict_gen(char *dict_name)
 	close(fd);
 	if (ft_ctrldict_error(str, 0) == 0)
 		return (0);
-	dict = data_dict(str);
+	dict = data_dict(str, ft_count_raws(str));
+	free(str);
 	return (dict);
 }

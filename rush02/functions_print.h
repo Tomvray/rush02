@@ -15,4 +15,5 @@
 
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
+int		ft_put_space(char *nbr, int print);
 #endif
