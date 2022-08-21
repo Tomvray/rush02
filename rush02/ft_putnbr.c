@@ -32,24 +32,33 @@ void	ft_put_digit(char *nbr, int size, char ***dict)
 		}
 		k++;
 	}
+	ft_put_space(nbr + size, 1);
 }
 
-void	ft_print_ten(char *nbr, int size, char ***dict)
+void	ft_print_ten(char *nbr, int size, char ***dict, int *ptr_size)
 {
 	char	tab[2];
 
 	tab[0] = nbr[0];
 	if (size == 2)
+	{
 		tab[1] = nbr[1];
+		*ptr_size = 0;
+	}
 	else
+	{
 		tab[1] = '0';
+		*ptr_size = 1;
+	}
 	ft_put_digit(tab, 2, dict);
+	ft_put_space(nbr + size, 1);
 }
 
 void	ft_only_hundred(char *nbr, char ***dict)
 {
 	ft_put_digit(nbr, 1, dict);
-	ft_putchar(' ');
+	if (ft_put_space(nbr, 0) == 0)
+		ft_putchar(' ');
 	ft_put_digit("100", 3, dict);
 	ft_put_space(nbr + 1, 1);
 }
@@ -71,24 +80,15 @@ void	ft_print_hundred(char *nbr, int size, char ***dict)
 		if (nbr [i] != '0')
 		{
 			if (nbr[i] == '1')
-			{
-				ft_print_ten(nbr + i, 2, dict);
-				ft_put_space(nbr + i + 2, 1);
-				size --;
-			}
+				ft_print_ten(nbr + i, 2, dict, &size);
 			else
-			{
-				ft_print_ten(nbr + i, 1, dict);
-				ft_put_space(nbr + i + 1, 1);
-			}
+				ft_print_ten(nbr + i, 1, dict, &size);
 		}
-		size --;
 		i++;
 	}
-	if (size == 1 && nbr[i] != '0')
+	if (size >= 1 && nbr[i] != '0')
 	{
 		ft_put_digit(nbr + i, 1, dict);
-		ft_put_space(nbr + i + 1, 1);
 	}
 }
 

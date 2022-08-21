@@ -77,6 +77,7 @@ int	process(char *nbr, char ***dict)
 	if (size == 1 && nbr[0] == '0')
 	{
 		ft_put_digit("0", 1, dict);
+		ft_putchar(10);
 		return (1);
 	}
 	ft_print_number(nbr, size, dict);

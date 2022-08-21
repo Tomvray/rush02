@@ -57,18 +57,21 @@ char	***data_dict(char *str, int n_raws)
 	char	***res;
 
 	i = 0;
-	k = 0;
+	k = -1;
 	res = malloc(sizeof(*res) * (n_raws + 1));
-	while (k < n_raws)
+	if (res == NULL)
+		return (NULL);
+	while (++k < n_raws)
 	{
 		res[k] = malloc(sizeof(**res) * 2);
+		if (res[k] == NULL)
+			return (NULL);
 		res[k][0] = ft_strncpy(str + i, size_int(str + i));
 		i += size_int(str + i);
 		while (str[i] == ' ' || str[i] == ':')
 			i++;
 		res[k][1] = ft_strncpy(str + i, ft_strlen(str + i));
 		i += ft_strlen(str + i);
-		k++;
 		i++;
 	}
 	res[k] = NULL;
